@@ -5,7 +5,7 @@ public abstract class Simulation<TimeType> {
     public TimeType startTime;
 
     protected abstract void init();
-    protected abstract void loop();
+    protected abstract void doOneStep();
 
     /**
      * Start the simulation
@@ -17,6 +17,6 @@ public abstract class Simulation<TimeType> {
 
     public void pumpTime(TimeType currentTime) {
         this.currentTime = currentTime;
-        this.loop();
+        this.doOneStep();
     }
 }
