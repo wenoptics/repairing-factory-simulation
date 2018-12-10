@@ -1,5 +1,7 @@
 package Components;
 
+import Util.Log;
+
 import java.util.ArrayList;
 
 public class RepairingFactorySimulation extends Simulation<Integer> {
@@ -28,8 +30,12 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
     protected void doOneStep() {
         int accTime = this.currentTime - this.startTime;
 
+        Log.info("=====================\n" +
+                "Current Time: "+currentTime.toString());
+
         // Check how many customers' coming
-        int nNewCustomer = customerGenerator.howMany(currentTime - lastTime);
+        Integer nNewCustomer = customerGenerator.howMany(currentTime - lastTime);
+        Log.info(String.format("nNewCustomer: %s", nNewCustomer.toString()));
         for (int i=0; i<nNewCustomer; i++) {
             Customer newCustomer = customerGenerator.generateOne();
             newCustomer.enteredRepairingShop(this.currentTime);
@@ -56,6 +62,7 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
 
         repairingService.tick(currentTime);
 
+        Log.info(String.format("There're %d customer waiting on the line", waitingQueue.getLength()));
     }
 
     private void tryToServeNextCustomer() {

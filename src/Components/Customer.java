@@ -1,5 +1,7 @@
 package Components;
 
+import Util.Log;
+
 public class Customer {
     public String name;
     public int vip_level;
@@ -13,6 +15,7 @@ public class Customer {
      */
     public void notifyStartRepairing(int nowTime) {
         timeRepairStarted = nowTime;
+        Log.info(String.format("Customer with vip_level == %d start repairing at t=%d!", vip_level, nowTime));
     }
 
     /**
@@ -21,6 +24,7 @@ public class Customer {
      */
     public void notifyEndOfRepairing(int nowTime) {
         timeRepairFinished = nowTime;
+        Log.info(String.format("Customer with vip_level == %d finish repairing at t=%d!", vip_level, nowTime));
     }
 
     /**
@@ -29,6 +33,7 @@ public class Customer {
      */
     public void enteredRepairingShop(int nowTime) {
         timeWaitStarted = nowTime;
+        Log.info(String.format("Customer with vip_level == %d entered Repairing Shop at t=%d", vip_level, nowTime));
     }
 
 

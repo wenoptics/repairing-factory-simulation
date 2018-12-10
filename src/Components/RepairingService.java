@@ -37,7 +37,7 @@ public class RepairingService {
 
         // How long do we take to finish
         // FIXME: 12/9/2018
-        this.ETAFinishTime = this.startTime + customer.vip_level * 5;
+        this.ETAFinishTime = (int) (this.startTime + customer.vip_level * 0.05);
 
         this.currentCustomer.notifyStartRepairing(startTime);
         this.repairingServiceStates = RepairingServiceStates.BUSY;

@@ -24,4 +24,8 @@ public class PriorityCustomerQueue {
     public Customer getNextPrioritized() {
         return pq.poll();
     }
+
+    public Integer getLength() {
+        return this.pq.size();
+    }
 }
