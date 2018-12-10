@@ -12,7 +12,7 @@ public class Demo {
         RepairingFactorySimulation repairingFactorySimulation = new RepairingFactorySimulation(customerGenerator);
 
         // Start the simulation and observe the simulation
-        int startTime = 0, endTime = 500;
+        int startTime = 0, endTime = 50;
         repairingFactorySimulation.start(startTime);
         for (int nowTime = startTime; nowTime <= endTime; nowTime++) {
             repairingFactorySimulation.pumpTime(nowTime);
