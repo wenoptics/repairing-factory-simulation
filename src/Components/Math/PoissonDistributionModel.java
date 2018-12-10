@@ -1,16 +1,28 @@
 package Components.Math;
 
-public class PoissonDistributionModel extends DistributionModel<Double> {
+import java.util.Random;
 
-    private double lambda;
+public class PoissonDistributionModel extends DistributionModel<Integer> {
 
-    public PoissonDistributionModel(double lambda) {
-        this.lambda = lambda;
+    private double mu;
+
+    public PoissonDistributionModel(double mu) {
+        this.mu = mu;
     }
 
     @Override
-    public Double getOne() {
-        // FIXME: 12/9/2018
-        return null;
+    public Integer getOne() {
+        double y = 0;
+        int k = 0;
+
+        while (y <= 1) {
+            Random random = new Random();
+            float u = random.nextInt();
+            double x = Math.exp(-mu * u);
+            y = y + x;
+            k = k + 1;
+        }
+
+        return k;
     }
 }

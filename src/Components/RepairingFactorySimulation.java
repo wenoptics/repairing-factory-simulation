@@ -1,13 +1,12 @@
 package Components;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 public class RepairingFactorySimulation extends Simulation<Integer> {
 
     private CustomerGenerator customerGenerator;
     private RepairingService repairingService;
-    private PriorityQueue waitingQueue;
+    private PriorityCustomerQueue waitingQueue;
 
     /**
      * We still have to collect these customer for reporting/stats
@@ -58,7 +57,7 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
 
     private void tryToServeNextCustomer() {
         // get the high priority customer from pq
-        Customer nextHighPriorityCustomer = waitingQueue.poll();
+        Customer nextHighPriorityCustomer = waitingQueue.getNextPrioritized();
 
         if (nextHighPriorityCustomer != null) {
             repairingService.serveOne(nextHighPriorityCustomer, currentTime);

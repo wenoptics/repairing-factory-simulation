@@ -2,19 +2,21 @@ package Components;
 
 import Components.Math.DistributionModel;
 import Components.Math.NormalDistributionModel;
+import Components.Math.PoissonDistributionModel;
 
 public class CustomerGenerator {
 
+    private PoissonDistributionModel customerNumberGenerator;
     private DistributionModel<Double> vipLevelGenerator;
     private double poissonLambda;
 
-    // TODO: 12/9/2018 integrid with possibility math model
     public boolean shouldGenerateNow(int e) {
         return true;
     }
 
     public CustomerGenerator(double poissonLambda) {
         this.poissonLambda = poissonLambda;
+        customerNumberGenerator = new PoissonDistributionModel(poissonLambda);
         vipLevelGenerator = new NormalDistributionModel();
     }
 
