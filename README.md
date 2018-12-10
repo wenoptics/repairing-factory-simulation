@@ -8,8 +8,9 @@
 
  - Customers enter the shop according to poisson distributions `lambda = 2`
  - Customers' VIP levels are random according to uniform distribution. (from 1 to 10)
- - The mechanic uses `customer.vip_level * 0.05` time units to finished one repairing
- - Simulation `t` as **hour**, starts from `t=0` hour to `t=50` hour
+ - The mechanic uses time that directly proportional to VIP level units to finish one repairing, with 
+ proportional `k = 0.05`
+ - Simulation starts from `t=0` to `t=50`, `t` as **hour**
 
 ### Simulation Outputs:
 
