@@ -1,19 +1,21 @@
 package Components.Math;
 
-public class NormalDistributionModel extends DistributionModel<Double> {
+import java.util.Random;
+
+public class NormalDistributionModel extends DistributionModel<Integer> {
 
     private final double mean;
     private final double std;
 
     public NormalDistributionModel(double mean, double std) {
-
         this.mean = mean;
         this.std = std;
     }
 
-    public Double getOne() {
+    public Integer getOne() {
         // FIXME: 12/9/2018
-        return mean;
+        Random random = new Random();
+        return random.nextInt(10) + 1;
     }
 
 }

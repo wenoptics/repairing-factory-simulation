@@ -8,7 +8,7 @@ public class Demo {
         // Simulate customer enter the repairing shop with poisson-distribution
         CustomerGenerator customerGenerator = new CustomerGenerator(2);
 
-        // Initialized our factor
+        // Initialized our factory
         RepairingFactorySimulation repairingFactorySimulation = new RepairingFactorySimulation(customerGenerator);
 
         // Start the simulation and observe the simulation

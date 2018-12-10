@@ -20,15 +20,18 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
     @Override
     protected void init() {
         finishedCustomers = new ArrayList<>();
+        repairingService = new RepairingService();
+        waitingQueue = new PriorityCustomerQueue();
     }
 
     @Override
     protected void doOneStep() {
         int accTime = this.currentTime - this.startTime;
 
-        // Check if there's new customer coming
-        if (this.customerGenerator.shouldGenerateNow(accTime)) {
-            Customer newCustomer = new Customer();
+        // Check how many customers' coming
+        int nNewCustomer = customerGenerator.howMany(currentTime - lastTime);
+        for (int i=0; i<nNewCustomer; i++) {
+            Customer newCustomer = customerGenerator.generateOne();
             newCustomer.enteredRepairingShop(this.currentTime);
 
             // The customer got into the waiting line!
