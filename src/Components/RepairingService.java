@@ -37,21 +37,25 @@ public class RepairingService {
 
         // How long do we take to finish
         // FIXME: 12/9/2018
-        this.ETAFinishTime = (int) (this.startTime + customer.vip_level * 0.05);
+        //this.ETAFinishTime = (int) (this.startTime + customer.vip_level * 0.05);
 
         this.currentCustomer.notifyStartRepairing(startTime);
         this.repairingServiceStates = RepairingServiceStates.BUSY;
     }
 
-    public Customer finishingWithCurrent(int currentTime) {
+    public void finishCurrent(int currentTime) {
+        currentCustomer.notifyEndOfRepairing(currentTime);
+        repairingServiceStates = RepairingServiceStates.IDLE;
+    }
+
+    public Customer checkFinishingWithCurrent(int currentTime) {
         if (isVacant()) {
             throw new RuntimeException("The repairing factory is currently NOT working on a customer");
         }
 
         if (currentTime > this.ETAFinishTime) {
             // we have done with this customer!
-            currentCustomer.notifyEndOfRepairing(currentTime);
-            repairingServiceStates = RepairingServiceStates.IDLE;
+            finishCurrent(currentTime);
             return currentCustomer;
         } else {
             // the service still has to process the current

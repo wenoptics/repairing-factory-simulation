@@ -41,11 +41,11 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
             waitingQueue.add(newCustomer);
         }
 
-        // At each step, check if our mechanics are working on a customer
+        /*// At each step, check if our mechanics are working on a customer
         if (repairingService.isBusy()) {
             // there's one customer been served right now
             // check if this one can be finish at this point
-            Customer cstm = repairingService.finishingWithCurrent(currentTime);
+            Customer cstm = repairingService.checkFinishingWithCurrent(currentTime);
             if (cstm != null) {
                 finishedCustomers.add(cstm);
 
@@ -57,19 +57,37 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
             tryToServeNextCustomer();
         }
 
-        repairingService.tick(currentTime);
+        repairingService.tick(currentTime);*/
 
+        // can serve 3 customers / timeu
+        int server_rate = 3;
+        int served = 0;
+        for ( int _i = 0; _i < server_rate; _i++ ) {
+            if (tryToServeNextCustomer()) {
+                served++;
+            }
+        }
+
+        Log.info(String.format("mechanics have been occupied %.2f%% [%d/%d] of this hours",
+                (double)served/server_rate*100, served, server_rate));
         Log.info(String.format("There're %d customer waiting on the line", waitingQueue.getLength()));
     }
 
-    private void tryToServeNextCustomer() {
+    /**
+     * @return if served
+     */
+    private boolean tryToServeNextCustomer() {
         // get the high priority customer from pq
         Customer nextHighPriorityCustomer = waitingQueue.getNextPrioritized();
 
         if (nextHighPriorityCustomer != null) {
             repairingService.serveOne(nextHighPriorityCustomer, currentTime);
+            // intermediately finished!
+            repairingService.finishCurrent(currentTime);
+            return true;
         } else {
             // there's no customer in the waiting line!
+            return false;
         }
     }
 
