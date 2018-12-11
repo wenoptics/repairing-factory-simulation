@@ -17,7 +17,8 @@ public class Demo {
         repairingFactorySimulation.start(startTime);
         for (int nowTime = startTime; nowTime <= endTime; nowTime++) {
 
-            Log.info(String.format("=====================\nnowTime: %d", nowTime));
+            Log.info("");
+            Log.info(String.format("===================== nowTime: %d =====================", nowTime));
 
             repairingFactorySimulation.pumpTime(nowTime);
         }

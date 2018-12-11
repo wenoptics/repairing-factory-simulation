@@ -1,6 +1,7 @@
 package Components;
 
 import Components.Math.DistributionModel;
+import Components.Math.InverseProportionalModel;
 import Components.Math.NormalDistributionModel;
 import Components.Math.PoissonDistributionModel;
 
@@ -18,7 +19,7 @@ public class CustomerGenerator {
     public CustomerGenerator(double poissonLambda) {
         this.poissonLambda = poissonLambda;
         customerNumberGenerator = new PoissonDistributionModel(poissonLambda);
-        vipLevelGenerator = new NormalDistributionModel(2, 4);
+        vipLevelGenerator = new InverseProportionalModel(5);
     }
 
     public Customer generateOne() {

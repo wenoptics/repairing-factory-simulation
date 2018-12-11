@@ -21,7 +21,7 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
 
     @Override
     protected void init() {
-        finishedCustomers = new ArrayList<>();
+        finishedCustomers = new ArrayList<Customer>();
         repairingService = new RepairingService();
         waitingQueue = new PriorityCustomerQueue();
     }
@@ -41,7 +41,7 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
             waitingQueue.add(newCustomer);
         }
 
-        /*// At each step, check if our mechanics are working on a customer
+        // At each step, check if our mechanics are working on a customer
         if (repairingService.isBusy()) {
             // there's one customer been served right now
             // check if this one can be finish at this point
@@ -57,9 +57,9 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
             tryToServeNextCustomer();
         }
 
-        repairingService.tick(currentTime);*/
+        repairingService.tick(currentTime);
 
-        // can serve 3 customers / timeu
+        /*// can serve 3 customers / timeu
         int server_rate = 3;
         int served = 0;
         for ( int _i = 0; _i < server_rate; _i++ ) {
@@ -69,7 +69,8 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
         }
 
         Log.info(String.format("mechanics have been occupied %.2f%% [%d/%d] of this hours",
-                (double)served/server_rate*100, served, server_rate));
+                (double)served/server_rate*100, served, server_rate));*/
+
         Log.info(String.format("There're %d customer waiting on the line", waitingQueue.getLength()));
     }
 
@@ -82,8 +83,8 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
 
         if (nextHighPriorityCustomer != null) {
             repairingService.serveOne(nextHighPriorityCustomer, currentTime);
-            // intermediately finished!
-            repairingService.finishCurrent(currentTime);
+            /*// intermediately finished!
+            repairingService.finishCurrent(currentTime);*/
             return true;
         } else {
             // there's no customer in the waiting line!
@@ -92,6 +93,18 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
     }
 
     public void stats() {
+        Log.info("");
+        Log.info("");
+        Log.info("");
+        Log.info("Statistics:");
+        int total_customer_cost = 0;
+        for (int i = 0; i < finishedCustomers.size(); i++) {
+            total_customer_cost +=
+                    finishedCustomers.get(i).timeRepairStarted - finishedCustomers.get(i).timeWaitStarted;
+        }
+        Log.info("Total costs for customers: $" + total_customer_cost * 10);
+        Log.info(String.format("There are still %d customers still in the line:", waitingQueue.getLength()));
+
 
     }
 

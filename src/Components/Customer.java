@@ -15,7 +15,8 @@ public class Customer {
      */
     public void notifyStartRepairing(int nowTime) {
         timeRepairStarted = nowTime;
-        Log.info(String.format("Customer with vip_level == %d start repairing at t=%d!", vip_level, nowTime));
+        Log.info(String.format("Customer (vip_level == %d) start repairing, after waited for %d hours, at t=%d!",
+                vip_level, timeRepairStarted - timeWaitStarted, nowTime));
     }
 
     /**
