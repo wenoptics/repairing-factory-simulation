@@ -28,7 +28,7 @@ public class Customer {
     }
 
     /**
-     * When customer enter the shop
+     * When customer enters the shop
      * @param nowTime the current timestamp
      */
     public void enteredRepairingShop(int nowTime) {

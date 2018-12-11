@@ -30,9 +30,6 @@ public class RepairingFactorySimulation extends Simulation<Integer> {
     protected void doOneStep() {
         int accTime = this.currentTime - this.startTime;
 
-        Log.info("=====================\n" +
-                "Current Time: "+currentTime.toString());
-
         // Check how many customers' coming
         Integer nNewCustomer = customerGenerator.howMany(currentTime - lastTime);
         Log.info(String.format("nNewCustomer: %s", nNewCustomer.toString()));

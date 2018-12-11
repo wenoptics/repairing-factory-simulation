@@ -1,5 +1,6 @@
 import Components.CustomerGenerator;
 import Components.RepairingFactorySimulation;
+import Util.Log;
 
 public class Demo {
 
@@ -15,6 +16,9 @@ public class Demo {
         int startTime = 0, endTime = 50;
         repairingFactorySimulation.start(startTime);
         for (int nowTime = startTime; nowTime <= endTime; nowTime++) {
+
+            Log.info(String.format("=====================\nnowTime: %d", nowTime));
+
             repairingFactorySimulation.pumpTime(nowTime);
         }
 
